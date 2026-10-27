@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
+import db from "../data/db.json";
 
 export const ProductContext = createContext();
 
@@ -12,7 +13,14 @@ export function ProductProvider({ children }) {
     const fetchProducts = async () => {
       // Example fetch call
       try {
+        // json-server only runs locally; production builds use the bundled data
+        if (!import.meta.env.DEV) {
+          setProducts(db.products);
+          setLoading(false);
+          return;
+        }
         const response = await fetch("/api/products");
+        if (!response.ok) throw new Error(`Request failed: ${response.status}`);
         const data = await response.json();
         setProducts(data);
         setLoading(false);
