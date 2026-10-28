@@ -9,8 +9,11 @@ const Header = () => {
     const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
 
     return (
-        <header className="p-4 flex justify-between items-center bg-white shadow-md">
-            <h1 className="text-2xl font-bold text-blue-600"> ShopMate</h1>
+        <header className="sticky top-0 z-40 p-4 flex justify-between items-center bg-white shadow-md">
+            <h1 className="flex items-center gap-2 text-2xl font-bold text-blue-600">
+              <img src="/shopmate-icon.svg" alt="" className="h-9 w-9" />
+              ShopMate
+            </h1>
             <div className="relative">
 
           <button className="cursor-pointer" onClick={() => setShowDropdown(!showDropdown)}>
